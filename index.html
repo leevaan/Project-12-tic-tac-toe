@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Levani Jikia" content="Levani Jikia">
+    <!-- <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="Free Web tutorials">
+    <meta http-equiv="refresh" content="30"> -->
+    <meta property="og:url" content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="When Great Minds Don’t Think Alike" />
+    <meta property="og:description" content="How much does culture influence creative thinking?" />
+    <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic tac toe</title>
+    <link rel="icon" type="png"  href="./assets/favicon-32x32.png">
+</head>
+<body>
+  <section class="sec-menu">
+      <svg width="72" height="32" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd">
+             <path d="M8.562 1.634 16 9.073l7.438-7.439a3 3 0 0 1 4.243 0l2.685 2.685a3 3 0 0 1 0 4.243L22.927 16l7.439 7.438a3 3 0 0 1 0 4.243l-2.685 2.685a3 3 0 0 1-4.243 0L16 22.927l-7.438 7.439a3 3 0 0 1-4.243 0L1.634 27.68a3 3 0 0 1 0-4.243L9.073 16 1.634 8.562a3 3 0 0 1 0-4.243L4.32 1.634a3 3 0 0 1 4.243 0Z" fill="#31C3BD"/><path d="M56.1 0c8.765 0 15.87 7.106 15.87 15.87 0 8.766-7.105 15.871-15.87 15.871-8.765 0-15.87-7.105-15.87-15.87C40.23 7.106 47.334 0 56.1 0Zm0 9.405a6.466 6.466 0 1 0 0 12.931 6.466 6.466 0 0 0 0-12.931Z" fill="#F2B137" fill-rule="nonzero"/>
+          </g>
+      </svg>
+      
+      <div class="sec-menu_choose-figure">
+        <h1>PICK PLAYER 1’S MARK</h1>
+        <div  class="sec-menu_figure">
+            <svg id="sec-menu_figure-x-background" xmlns="http://www.w3.org/2000/svg" width="197" height="54"  fill="none">
+              <rect   width="198" height="54" rx="10" fill="#1A2A33"/>
+              <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M114.557 16.2897L109.71 11.4431C109.12 10.8523 108.162 10.8523 107.571 11.4431L99 20.014L90.429 11.4431C89.8383 10.8523 88.8805 10.8523 88.2897 11.4431L83.4431 16.2897C82.8523 16.8805 82.8523 17.8383 83.4431 18.429L92.014 27L83.4431 35.571C82.8523 36.1617 82.8523 37.1195 83.4431 37.7103L88.2897 42.5569C88.8805 43.1477 89.8383 43.1477 90.429 42.5569L99 33.986L107.571 42.5569C108.162 43.1477 109.12 43.1477 109.71 42.5569L114.557 37.7103C115.148 37.1195 115.148 36.1617 114.557 35.571L105.986 27L114.557 18.429C115.148 17.8383 115.148 16.8805 114.557 16.2897Z"
+                    fill="#A8BFC9"
+                    id="sec-menu_figure-x"/>
+            </svg>
+
+            <svg id="sec-menu_figure-o-background" xmlns="http://www.w3.org/2000/svg" width="197" height="54" viewBox="72 0 54 54" fill="none">
+              <rect  width="198" height="54" rx="10" fill="#A8BFC9"/>
+              <path fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M114.741 26.8706C114.741 18.1055 107.636 11 98.8706 11C90.1055 11 83 18.1055 83 26.8706C83 35.6357 90.1055 42.7412 98.8706 42.7412C107.636 42.7412 114.741 35.6357 114.741 26.8706ZM92.4048 26.8706C92.4048 23.2996 95.2996 20.4048 98.8706 20.4048C102.442 20.4048 105.336 23.2996 105.336 26.8706C105.336 30.4416 102.442 33.3364 98.8706 33.3364C95.2996 33.3364 92.4048 30.4416 92.4048 26.8706Z"
+                    fill="#1A2A33"
+                    id="sec-menu_figure-o"/>
+            </svg>
+        </div>
+        <span>REMEMBER : X GOES FIRST</span>
+      </div>
+
+      <button class="sec-menu_yellow-button">NEW GAME (VS CPU)</button>
+      <button class="sec-menu_blue-button">NEW GAME  (VS PLAYER)</button>
+  </section>
+
+  <section class="sect-start">
+      <div class="sect-start_head">
+        <svg viewBox="0 0 72 32"  width="72" height="32" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd">
+            <path d="M8.562 1.634 16 9.073l7.438-7.439a3 3 0 0 1 4.243 0l2.685 2.685a3 3 0 0 1 0 4.243L22.927 16l7.439 7.438a3 3 0 0 1 0 4.243l-2.685 2.685a3 3 0 0 1-4.243 0L16 22.927l-7.438 7.439a3 3 0 0 1-4.243 0L1.634 27.68a3 3 0 0 1 0-4.243L9.073 16 1.634 8.562a3 3 0 0 1 0-4.243L4.32 1.634a3 3 0 0 1 4.243 0Z" fill="#31C3BD"/><path d="M56.1 0c8.765 0 15.87 7.106 15.87 15.87 0 8.766-7.105 15.871-15.87 15.871-8.765 0-15.87-7.105-15.87-15.87C40.23 7.106 47.334 0 56.1 0Zm0 9.405a6.466 6.466 0 1 0 0 12.931 6.466 6.466 0 0 0 0-12.931Z" fill="#F2B137" fill-rule="nonzero"/>
+          </g>
+        </svg>
+        <div class="sect-start_head-turn">
+          <svg id="turnX"  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.7231 3.30608L16.6939 0.276913C16.3247 -0.0923043 15.7261 -0.0923043 15.3569 0.276913L10 5.63378L4.64314 0.276913C4.27392 -0.0923043 3.6753 -0.0923043 3.30608 0.276913L0.276913 3.30608C-0.0923043 3.6753 -0.0923043 4.27392 0.276913 4.64314L5.63378 10L0.276913 15.3569C-0.0923043 15.7261 -0.0923043 16.3247 0.276913 16.6939L3.30608 19.7231C3.6753 20.0923 4.27392 20.0923 4.64314 19.7231L10 14.3662L15.3569 19.7231C15.7261 20.0923 16.3247 20.0923 16.6939 19.7231L19.7231 16.6939C20.0923 16.3247 20.0923 15.7261 19.7231 15.3569L14.3662 10L19.7231 4.64314C20.0923 4.27392 20.0923 3.6753 19.7231 3.30608Z" fill="#A8BFC9"/>
+          </svg>
+          <svg id="turnO" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10ZM5.92593 10C5.92593 7.74995 7.74995 5.92593 10 5.92593C12.25 5.92593 14.0741 7.74995 14.0741 10C14.0741 12.25 12.25 14.0741 10 14.0741C7.74995 14.0741 5.92593 12.25 5.92593 10Z" fill="#A8BFC9"/>
+          </svg>
+          <span>TURN</span>
+        </div>
+        <div class="sect-start_head-restart">
+         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.524 0h-1.88a.476.476 0 0 0-.476.499l.159 3.284A9.81 9.81 0 0 0 9.835.317C4.415.317-.004 4.743 0 10.167.004 15.597 4.406 20 9.835 20a9.796 9.796 0 0 0 6.59-2.536.476.476 0 0 0 .019-.692l-1.348-1.349a.476.476 0 0 0-.65-.022 6.976 6.976 0 0 1-9.85-.63 6.987 6.987 0 0 1 .63-9.857 6.976 6.976 0 0 1 10.403 1.348l-4.027-.193a.476.476 0 0 0-.498.476v1.881c0 .263.213.476.476.476h7.944A.476.476 0 0 0 20 8.426V.476A.476.476 0 0 0 19.524 0Z" fill="#1F3641"/>
+        </svg>
+       </div>
+      </div>
+
+      <div class="sect-start_body">
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class="xy-container"></div>
+        <div class=
+        "xy-container"></div>
+      </div>
+
+      <div class="sect-start_footer">
+        <div style="background-color: #31C3BD;">
+          <span>X (YOU)</span>
+          <span>0</span>
+        </div>
+        <div style="background-color: #A8BFC9;">
+          <span>TIES</span>
+          <span>0</span>
+        </div>
+        <div style="background-color: #F2B137;">
+          <span>O (CPU)</span>
+          <span>0</span>
+        </div>
+      </div>
+  </section>
+
+  <section class="sec-cover">
+    <div>
+      <div>
+        <div class="sec-cover_lost-content">
+          <span>OH NO, YOU LOST…</span>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731 64 32ZM18.963 32C18.963 24.7998 24.7998 18.963 32 18.963C39.2002 18.963 45.037 24.7998 45.037 32C45.037 39.2002 39.2002 45.037 32 45.037C24.7998 45.037 18.963 39.2002 18.963 32Z" fill="#F2B137"/>
+            </svg>            
+            <h1>RESTART GAME?</h1>
+          </div>
+        </div>
+        
+        <div class="sec-cover_won-content">
+          <span>YOU WON!</span>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M53.2406 1.14742C52.0691 -0.0241513 50.1696 -0.0241497 48.998 1.14742L32 18.1454L15.002 1.14742C13.8304 -0.0241506 11.9309 -0.0241496 10.7594 1.14742L1.14742 10.7594C-0.0241497 11.9309 -0.0241481 13.8304 1.14742 15.002L18.1454 32L1.14742 48.998C-0.0241506 50.1696 -0.0241496 52.0691 1.14742 53.2406L10.7594 62.8526C11.9309 64.0241 13.8304 64.0241 15.002 62.8526L32 45.8546L48.998 62.8526C50.1696 64.0242 52.0691 64.0241 53.2406 62.8526L62.8526 53.2406C64.0242 52.0691 64.0241 50.1696 62.8526 48.998L45.8546 32L62.8526 15.002C64.0242 13.8304 64.0241 11.9309 62.8526 10.7594L53.2406 1.14742Z" fill="#31C3BD"/>
+            </svg>          
+            <h1>TAKES THE ROUND</h1>
+          </div>
+        </div>
+        
+
+        <div class="sec-cover_button-content">
+          <button class="sec-cover_quit-button">QUIT</button>
+          <button class="sec-cover_next-button">NEXT ROUND</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>

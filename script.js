@@ -65,11 +65,11 @@ RectOBackground.addEventListener("mouseover", () =>{
     }
 });
 
-const turnXorO = (x) => {
-    if(x == X){
+const turnXorO = (XorO) => {
+    if(XorO == X){
         turnX.style.display = "inline-block";   
         turnO.style.display = "none";   
-    }else if(x == O){
+    }else if(XorO == O){
         turnX.style.display = "none";   
         turnO.style.display = "inline-block";
     }
@@ -117,6 +117,13 @@ let checkWinnerIndex = [
     [1, 4, 7],// 2 column
     [2, 5, 8],// 3 column
 ];
+const reset = () => {
+    // reset boxes value
+    Array.from(startBody.children).forEach((xoContainer) => {
+        xoContainer.innerHTML = "";
+        xoContainer.style.backgroundColor = "#1F3641";
+    });
+};
 //restart button
 restart.addEventListener("click", () => {
     noCancel.style.display = "flex";
@@ -153,14 +160,20 @@ yesRestart.addEventListener("click", () => {
     nextButton.style.display = "flex";
     noCancel.style.display = "none";
     yesRestart.style.display = "none";
+
+    if(nextBlueFlag && XO == O){
+        blueButtonFlag = true;
+    }else if(nextYellowFlag && XO == O){
+        mouseupFlag = true;
+        cpuMouseUp();
+    }
+    //X and O icon changer
+    if(nextYellowFlag && XO == O){
+        turnXorO(O)
+    }else{
+        turnXorO(X)
+    }
 })
-const reset = () => {
-    // reset boxes value
-    Array.from(startBody.children).forEach((xoContainer) => {
-        xoContainer.innerHTML = "";
-        xoContainer.style.backgroundColor = "#1F3641";
-    });
-};
 
 quitButton.addEventListener("click", () => {
     secCover.style.display = "none";
@@ -181,7 +194,18 @@ nextButton.addEventListener("click", () => {
     secCover.style.display = "none";
     XOcount = 0;
     reset();
-    
+    if(nextBlueFlag && XO == O){
+        blueButtonFlag = true;
+    }else if(nextYellowFlag && XO == O){
+        mouseupFlag = true;
+        cpuMouseUp();
+    }
+    //X and O icon changer
+    if(nextYellowFlag && XO == O){
+        turnXorO(O)
+    }else{
+        turnXorO(X)
+    }
 });
 
 function randomNum(min, max) {
@@ -221,30 +245,30 @@ const winnerChecker = (XorO) => {
             noCancel.style.display = "none";
             yesRestart.style.display = "none";
             takesTheRound.innerHTML = "TAKES THE ROUND";
-            // if you choose O and won
-            if(XO == O && XorO == O){
+            //  if you choose yellow button, O and won && if you choose blue button, O and won 
+            if(nextYellowFlag && XO == O && XorO == O || nextBlueFlag && playerYou == O && XorO == O){ 
                 console.log('winner is OOO: ', XorO, winnerIndex);
                 cover("YOU WON!", "#F2B137", "<img class='img-x-o' src='./assets/icon-o.svg' alt='X icon'>");
                 winnerStyle("#F2B137","<img class='o' src='./assets//icon-o-gray.svg'>");
                 pOCount++;
                 numberO.innerHTML = pOCount;
-            // if you choose O and lost
-            }else if(XO == O && XorO == X){ 
+            // if you choose yellow button, O and lost && if you choose blue button, O and lost 
+            }else if(nextYellowFlag && XO == O && XorO == X || nextBlueFlag && playerYou == O && XorO == X){ 
                 console.log("you ara wagebull");
                 cover("OH NO, YOU LOST…", "#F2B137", "<img class='img-x-o' src='./assets/icon-o.svg' alt='X icon'>");
                 winnerStyle("#31C3BD","<img class='o' src='./assets//icon-x-gray.svg'>");
                 pXCount++;
                 numberX.innerHTML = pXCount;
             }
-             // if you choose X and won
-            if(XO == X && XorO == X){
+            // if you choose yellow button, X and won && if you choose blue button, X and won 
+            if(nextYellowFlag && XO == X && XorO == X || nextBlueFlag && playerYou == X && XorO == X){
                 console.log('winner is XXXX: ', XorO, winnerIndex);
                 cover("YOU WON!", "#31C3BD", "<img class='img-x-o' src='./assets/icon-x.svg' alt='X icon'>");
                 winnerStyle("#31C3BD","<img class='o' src='./assets//icon-x-gray.svg'>");
                 pXCount++;
                 numberX.innerHTML = pXCount;
-            // if you choose X and lost
-            }else if(XO == X && XorO == O){ 
+            // if you choose yellow button, X and lost && if you choose blue button, X and lost 
+            }else if(nextYellowFlag && XO == X && XorO == O || nextBlueFlag && playerYou == X && XorO == O){ 
                 cover("OH NO, YOU LOST…", "#31C3BD", "<img class='img-x-o' src='./assets/icon-x.svg' alt='X icon'>");
                 winnerStyle("#F2B137","<img class='o' src='./assets//icon-o-gray.svg'>");
                 pOCount++;
@@ -296,7 +320,7 @@ const random = () => {
         }
     });
 }
-
+//cpu mouse up
 const cpuMouseUp = () => {
     if(mouseupFlag){
         //random  mark  in box X or O
@@ -304,7 +328,9 @@ const cpuMouseUp = () => {
         XOcount++;
         if(XO == X){
             turnXorO(X);
-        }else{
+        }
+        if(XO == O){
+            console.log("apshic modiss?");
             turnXorO(O);
         }
         // winner checker start when marked at least five boxes.
@@ -315,18 +341,17 @@ const cpuMouseUp = () => {
                 winnerChecker(X);
             }
         }
-        console.log('klik out: ', XOcount);
+        console.log('cpu klik out: ', XOcount);
         unmarkedIndex = [];
         mouseupFlag = false;
     }
 }
+//player mouse up
 const playerMouseUp = () => {
     if(mouseupFlag){
         if(XO == X){
-            turnXorO(X);
             XO = O;
         }else{
-            turnXorO(O);
             XO = X;
         }
         // winner checker start when marked at least five boxes.
@@ -338,7 +363,7 @@ const playerMouseUp = () => {
             }
         }
         mouseupFlag = false;
-        console.log('klik out: ', XOcount);
+        console.log('player klik out: ', XOcount);
     }
 }
 
@@ -346,10 +371,9 @@ const outlineXO = () => {
     startBody.addEventListener("mouseover", event => {
         if(blueButtonFlag){
             XO = X;
-            // blueButtonFlag = false;
+            blueButtonFlag = false;
         }
         if(XO == X ){
-            console.log('XO: ', XO);
             XorO = X;
             outlineXorO = outlineX;
             iconXorO = iconX;
@@ -399,11 +423,23 @@ const outlineXO = () => {
                         winnerChecker(O);
                     }
                 }
-                //"turn" icon changer
-                if(XO == X){
-                    turnXorO(O);
-                }else{
+                //"turn" icon changer for yellow button
+                if(XO == O && nextYellowFlag){
+                    console.log("rato ar modis");
                     turnXorO(X);
+                }else if(XO == X && nextYellowFlag){
+                    turnXorO(O);
+                }
+                //"turn" icon changer for blued button
+                if(playerYou == X && nextBlueFlag){
+                    turnXorO(O);
+                }else if (playerYou == O && nextBlueFlag){
+                    turnXorO(O);
+                } 
+                if(XO == O && nextBlueFlag){
+                    turnXorO(X);
+                }else if(XO == X && nextBlueFlag){
+                    turnXorO(O);
                 }
             }
             mousedownFlag = false;
@@ -412,7 +448,10 @@ const outlineXO = () => {
 }
 // When we press Yellow button
 let runFlag = true; 
+let nextYellowFlag = false;
 yellowButton.addEventListener("click", () => {
+    nextYellowFlag = true;
+    nextBlueFlag = false;
     secMenu.style.display = "none";
     secStart.style.display = "flex";
     pX.innerHTML = "X (YOU)";
@@ -444,24 +483,27 @@ yellowButton.addEventListener("click", () => {
     }
 })
 // When we press Blue button
+let playerYou = "";
 let blueButtonFlag = false;
+let nextBlueFlag = false;
 blueButton.addEventListener("click", () => {
+    nextBlueFlag = true;
+    nextYellowFlag = false;
     blueButtonFlag = true;
     secMenu.style.display = "none";
     secStart.style.display = "flex";
     pX.innerHTML = "X (YOU)";
     pO.innerHTML = "O (CPU)";
     XOcount = 0;
-    
+    playerYou = XO;
     if(XO == X){
         pX.innerHTML = "X (P1)";
         pO.innerHTML = "O (P2)";
-        turnXorO(X);
     }else{
         pO.innerHTML = "O (P1)";
         pX.innerHTML = "X (P2)";
-        turnXorO(O);
     }
+    turnXorO(X);
     startBody.removeEventListener("mouseup",cpuMouseUp);
     startBody.addEventListener("mouseup", playerMouseUp);
     

@@ -16,6 +16,7 @@ body{
     max-width: 460px;
     width: 100%;
     height: 100vh;
+    margin: 0 24px 0 24px;
 }
 .sec-menu_choose-figure{
     display: flex;
@@ -56,6 +57,11 @@ body{
 }
 .sec-menu_figure > svg{
     cursor: pointer;
+    width: 198px;
+    max-width: 100%;
+    border-radius: 10px;
+    /* width: 50%; */
+    /* max-width: clamp(8.25rem, -1.1786rem + 47.1429vw, 12.375rem); */
 }
 .sec-menu button{
     height: 67px;
